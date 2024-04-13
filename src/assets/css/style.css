@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+/* font-family: "Montserrat", sans-serif; */
+/* font-family: "Inter", sans-serif; */
+
+
+*,
+::after,
+::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --global-bg: #fcfcfc;
+    --font-color: #1b1f29;
+    --highlight-color: #3d69f6;
+
+    --font-intr: "Inter", sans-serif;
+    --font-mont: "Montserrat", sans-serif;
+
+    --font-w-xxl: 900;
+    --font-w-xl: 700;
+    --font-w-x: 600;
+    --font-w-m: 500;
+    --font-w-s: 400;
+    --font-w-xs: 200;
+
+    --font-s-xll: 2.5rem;
+    --font-s-xl: 2rem;
+    --font-s-x: 1.2rem;
+    --font-s-m: 1rem;
+    --font-s-xs: .5rem;
+
+
+    /* --------------- DASHBOARD --------------- */
+    --main-bg-color: #009d63;
+    --main-text-color: #009d63;
+    --second-text-color: #bbbec5;
+    --second-bg-color: #c1efde;
+}
+
+a,
+li {
+    all: unset;
+}
+
+
+/* ------------------ NAV BAR ------------------------- */
+header {
+    font-family: var(--font-mont);
+    font-weight: var(--font-w-m);
+}
+
+nav {
+    background: transparent !important;
+    border-bottom: 1px solid var(--font-color);
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.custom-toggler .navbar-toggler-icon {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.custom-toggler {
+    /* border: 1px solid #000; */
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.custom-cross-icon {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    position: relative;
+}
+
+.custom-cross-icon:before,
+.custom-cross-icon:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+}
+
+.custom-cross-icon:before {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.custom-cross-icon:after {
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+
+
+/* -------------------------- CSS FOR ADMIN PANEL -------------------------- */
+.primary-text {
+    color: var(--main-text-color);
+}
+
+.second-text {
+    color: var(--second-text-color);
+}
+
+.primary-bg {
+    background-color: var(--main-bg-color);
+}
+
+.secondary-bg {
+    background-color: var(--second-bg-color);
+}
+
+.rounded-full {
+    border-radius: 100%;
+}
+
+#wrapper {
+    overflow-x: hidden;
+    background-image: linear-gradient(to right,
+            #baf3d7,
+            #c2f5de,
+            #cbf7e4,
+            #d4f8ea,
+            #ddfaef);
+    font-family: var(--font-intr);
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin 0.25s ease-out;
+    -moz-transition: margin 0.25s ease-out;
+    -o-transition: margin 0.25s ease-out;
+    transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+#menu-toggle {
+    cursor: pointer;
+}
+
+.list-group-item {
+    border: none;
+    padding: 20px 30px;
+}
+
+.list-group-item.active {
+    background-color: transparent;
+    color: var(--main-text-color);
+    font-weight: bold;
+    border: none;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
+
+/* -------------------------- CSS FOR ADMIN PANEL -------------------------- */
+
+
+/* ----------------------------- Page Not Found----------------------------- */
+.custom_404{
+    font-family: var(--font-intr);
+}
+/* ----------------------------- Page Not Found----------------------------- */
+
+
+
+/* ------------------  MEDIA QUERY --------------------------*/
+@media (max-width: 921px) {}
+
+@media (max-width: 600px) {}
+
+
+@media (max-width: 425px) {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------- MEDIA QUERY SECTION --------------------- */
