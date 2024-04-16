@@ -1,0 +1,61 @@
+var path = require('path');
+require('dotenv').config();
+
+//get root directoty of the location where source code is uploaded
+const BASEPATH = path.resolve(__dirname, '..');
+
+
+const controllerPath = BASEPATH + '/src/controller/';
+
+
+
+//mysql config for
+// const MYSQL_CONFIG = {
+//     connectionLimit: 25,
+//     host: process.env.MYSQL_HOST || MYSQL_HOST,
+//     user: process.env.MYSQL_USER || MYSQL_USER,
+//     password: process.env.MYSQL_PASSWORD || MYSQL_PASSWORD,
+//     database: process.env.MYSQL_DB || MYSQL_DB,
+//     multipleStatements: true
+// };
+
+//+++++++++++++++++++++++++++++++++++++++++====SERVER AND DB CONFIGS===++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//--------- DATA_BASE_CONFIG LOCAL FOR MYSQL ----------------
+const DB_CONFIG = {
+    user: process.env.DB_USER_LOCAL,
+    host: process.env.DB_HOST_LOCAL,
+    database: process.env.DATABASE_NAME_LOCAL,
+    password: process.env.DB_PASSWORD_LOCAL,
+    port: process.env.DB_PORT_LOCAL,
+    // max: 20,
+    // idleTimeoutMillis: 1000,
+    // connectionTimeoutMillis: 1000,
+    // maxUses: 7500,
+}
+
+
+
+
+
+//----------- SERVER CONFIG LOCAL-----------------
+const BACKEND_HOST = {
+    IP_HOST: `${process.env.BKEND_HOST_NO_SSL_LOCAL}://${process.env.BKEND_IP_LOCAL}:${process.env.BKEND_PORT_LOCAL}`,
+    IP_HOST_SSL: `${process.env.BKEND_HOST_SSL_LOCAL}://${process.env.BKEND_IP_LOCAL}:${process.env.BKEND_PORT_LOCAL}`,
+    HOST_SSL: `${process.env.BKEND_HOST_SSL_LOCAL}`,
+    HOST_NO_SSL: process.env.BKEND_HOST_NO_SSL_LOCAL,
+    PORT: process.env.BKEND_PORT_LOCAL,
+    IP: `${process.env.BKEND_IP_LOCAL}`,
+}
+
+
+//+++++++++++++++++++++++++++++++++++++++++====SERVER AND DB CONFIGS===++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+module.exports = {
+    controllerPath: controllerPath,
+    DB_CONFIG: DB_CONFIG,
+    BACKEND_HOST: BACKEND_HOST,
+}
+
+

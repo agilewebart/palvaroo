@@ -1,0 +1,6 @@
+module.exports.statusCode = {
+    SUCCESS:200,
+    PARAMETER_MISSING:1004,
+    INTERNAL_SERVER:500,
+    SOME_ERROR_OCCUR:400
+}
