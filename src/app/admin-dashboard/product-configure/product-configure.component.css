@@ -1,0 +1,22 @@
+/* Fix table header */
+.table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    /* background-color: #fff; */
+     /* Optional: Change the background color of the header */
+}
+
+/* Optional: Adjust the z-index and background color to make it visually appealing */
+.table thead th:first-child {
+    z-index: 2; /* Ensure the first column header appears above others */
+    /* background-color: #f8f9fa; */
+     /* Optional: Change the background color of the first column header */
+}
+
+
+/* Decrease the size of edit and delete buttons */
+.btn.btn-sm {
+    padding: 0.25rem 0.5rem; /* Adjust padding to decrease button size */
+    font-size: 0.875rem; /* Adjust font size to match smaller button */
+}

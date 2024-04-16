@@ -5,6 +5,7 @@
 /* font-family: "Montserrat", sans-serif; */
 /* font-family: "Inter", sans-serif; */
 
+@import "node_modules/angular-notifier/styles.css";
 
 *,
 ::after,
@@ -18,7 +19,9 @@
 :root {
 
     --global-bg: #fcfcfc;
+    --fade-grey: #8e8a8a;
     --font-color: #1b1f29;
+    --light-grey: #ccc;
     --highlight-color: #3d69f6;
 
     --font-intr: "Inter", sans-serif;
@@ -31,6 +34,7 @@
     --font-w-s: 400;
     --font-w-xs: 200;
 
+    --font-s-xlll: 4rem;
     --font-s-xll: 2.5rem;
     --font-s-xl: 2rem;
     --font-s-x: 1.2rem;
@@ -43,24 +47,64 @@
     --main-text-color: #009d63;
     --second-text-color: #bbbec5;
     --second-bg-color: #c1efde;
+    /* --------------- DASHBOARD --------------- */
 }
 
-a,
-li {
+a {
     all: unset;
+    cursor: pointer;
 }
 
+li {
+    list-style: none;
+}
 
-/* ------------------ NAV BAR ------------------------- */
-header {
+/* ========================================= MAIN PAGE CSS START ========================================== */
+
+/* ------------------ NAV BAR START------------------------- */
+
+#header {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
     font-family: var(--font-mont);
     font-weight: var(--font-w-m);
 }
 
-nav {
-    background: transparent !important;
-    border-bottom: 1px solid var(--font-color);
+
+.navbar {
+    border-bottom: .05px solid var(--fade-grey);
 }
+
+.navbar li {
+    cursor: pointer;
+    color: var(--global-bg);
+}
+
+
+.main {
+    position: relative;
+    background: url(/assets/images/hero_sec.png);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    padding: 280px 0 220px;
+    font-family: var(--font-mont);
+    color: var(--global-bg);
+
+}
+
+
+.main h2 {
+    font-size: 3rem;
+    font-weight: var(--font-w-xl);
+    text-transform: uppercase;
+}
+
+.main p {
+    font-weight: var(--font-w-xl);
+}
+
 
 .navbar-toggler {
     border: none;
@@ -104,6 +148,151 @@ nav {
     transform: translateY(-50%) rotate(-45deg);
 }
 
+/* ------------------ NAV BAR END------------------------- */
+
+
+
+/* --------------------- ABOUT US START ----------------------------- */
+
+
+
+
+/* --------------------- ABOUT US END----------------------------- */
+
+
+
+/* /--------------------- Contact us ---------------------------------- */
+.contact_container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: var(--font-intr);
+}
+
+.contact {
+
+    padding: 50px 0;
+}
+
+.contact h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--light-grey);
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: var(--highlight-color);
+    color: var(--global-bg);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--highlight-color);
+}
+
+@media (max-width: 600px) {
+    .form-group {
+        width: 100%;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: calc(100% - 20px);
+    }
+}
+
+/* ---------------------------- Contact us end --------------------------- */
+
+/* /------------------------------------ Footer section -------------------------- */
+.footer_container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.footer {
+    padding: 50px 0;
+    font-family: var(--font-intr);
+    color: var(--font-color);
+
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer-column {
+    flex: 1;
+    margin-right: 20px;
+    /* text-align: center; */
+}
+
+.footer-column h3 {
+    margin-bottom: 30px;
+    font-weight: var(--font-s-xs);
+    font-size: 1.2rem;
+}
+
+.footer-column ul {
+    /* text-align: center; */
+    padding-left: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+    font-weight: var(--font-w-s);
+    font-size: .9rem;
+}
+
+.footer-column ul li a {
+    /* color: #fff; */
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .footer-column {
+        flex: 0 0 100%;
+        margin-bottom: 20px;
+    }
+
+
+}
+
+@media (max-width: 600px) {
+    .footer-column {
+        text-align: center;
+    }
+
+    .footer-column ul {
+        text-align: center;
+    }
+}
+
+
+/* ========================================= MAIN PAGE CSS START ========================================== */
 
 
 /* -------------------------- CSS FOR ADMIN PANEL -------------------------- */
@@ -199,9 +388,10 @@ nav {
 
 
 /* ----------------------------- Page Not Found----------------------------- */
-.custom_404{
+.custom_404 {
     font-family: var(--font-intr);
 }
+
 /* ----------------------------- Page Not Found----------------------------- */
 
 
