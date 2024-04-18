@@ -1,15 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const productModel = require('../model/productModel')
+const constant = require('../constants/statusCode');
+const productModel = require('../model/productModel');
 const imgUpload = require('../utility/imageUploader');
+
+
 
 
 //---------------- Product Image Upload -----------------
 router.post('/v1/productimageupload', imgUpload.upload.single('file_name'), async (req, res) => {
     try {
         let body = req.file;
-        console.log(body.filename)
-        
+        const fileName = body.filename;
+        if (fileName) {
+            return res.status(constant.statusCode.SUCCESS).json({ success: true, status: constant.statusCode.SUCCESS, message: '', response: fileName })
+        }
+        return res.status(constant.statusCode.SOME_ERROR_OCCUR).json({ success: true, status: constant.statusCode.SOME_ERROR_OCCUR, message: 'Some error occur', response: null })
 
     } catch (err) {
         console.log("-------File Controller Error --> ", err);
@@ -33,6 +39,10 @@ router.post('/v1/addnewproduct', async (req, res) => {
         console.log("-------Add Controller Error --> ", err);
         return res.status(500).json({ success: true, status: 500, message: "Internal Server error" })
     }
-})
+});
+
+
+
+
 
 module.exports = router;

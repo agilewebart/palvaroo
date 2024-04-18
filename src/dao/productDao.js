@@ -4,7 +4,12 @@ module.exports.addNewProduct = async (reqBody) => {
     try {
 
         let req = reqBody;
-        console.log("------------->>> ",req);
+        let qryArr = [];
+        let sqlQry;
+        sqlQry = `SELECT * FROM user where status = 1`
+        const [dbRes,fields] = await dbConn.connection.execute(sqlQry,qryArr);
+        return dbRes;
+
     }
     catch (err) {
         console.log("---------Db Error ----> ", err);
