@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
@@ -14,6 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { register } from 'swiper/element/bundle';
+register();
 
 // import {
 //   NgxUiLoaderModule,
@@ -61,6 +64,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     NgxUiLoaderModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

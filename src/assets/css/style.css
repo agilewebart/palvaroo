@@ -59,6 +59,20 @@ li {
     list-style: none;
 }
 
+
+
+/* Override Bootstrap input field focus style */
+input.form-control:focus,
+select.form-control:focus,
+select.form-select:focus,
+textarea.form-control:focus,
+button.btn:focus,
+li:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
 /* ========================================= MAIN PAGE CSS START ========================================== */
 
 /* ------------------ NAV BAR START------------------------- */
@@ -69,8 +83,24 @@ li {
     width: 100%;
     font-family: var(--font-mont);
     font-weight: var(--font-w-m);
+    color: var(--global-bg);
 }
 
+#header .nav-link {
+    color: var(--global-bg);
+}
+
+
+
+.dropdown-menu {
+    overflow: hidden;
+    /* This ensures that the overflow is hidden */
+}
+
+/* .dropdown-item:hover {
+    background-color: #187add;
+    color: #333;
+} */
 
 .navbar {
     border-bottom: .05px solid var(--fade-grey);
@@ -148,17 +178,114 @@ li {
     transform: translateY(-50%) rotate(-45deg);
 }
 
+
+/* --------------- Right sided navnbar --------- */
+
+.work-with-me-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* Align section to the right */
+}
+
+.work-with-me-section button {
+    margin-left: 10px;
+    /* Default spacing between icons and button */
+}
+
+.work-with-me-section i {
+    margin-left: 10px;
+    /* Default spacing between icons */
+}
+
+/* Adjust spacing for smaller screens */
+@media (max-width: 768px) {
+    .work-with-me-section button {
+        margin-left: 10px;
+        /* Decrease spacing between icons and button */
+    }
+
+    .work-with-me-section i {
+        margin-left: 10px;
+        /* Decrease spacing between icons */
+    }
+}
+
+/* Adjust spacing for even smaller screens */
+@media (max-width: 576px) {
+    .work-with-me-section button {
+        margin-left: 10px;
+        /* Further decrease spacing between icons and button */
+    }
+
+    .work-with-me-section i {
+        margin-left: 10px;
+        /* Further decrease spacing between icons */
+    }
+}
+
+/* --------------- Right sided navnbar --------- */
+
+
 /* ------------------ NAV BAR END------------------------- */
 
 
 
 /* --------------------- ABOUT US START ----------------------------- */
+.container_about {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
+.sub-container {
+    flex: 1 1 calc(50% - 10px);
+    /* Two containers per row on large screens */
+    max-width: calc(50% - 10px);
+    /* background-color: #f0f0f0; */
+    padding: 20px;
+    box-sizing: border-box;
+
+}
+
+.container1 {
+    font-family: var(--font-mont);
+    font-size: var(--font-s-xll);
+}
+
+.container4 {
+    font-family: var(--font-mont);
+    font-size: var(--font-s-xl);
+    font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+    .sub-container {
+        flex: 1 1 calc(100% - 20px);
+        /* One container per row on smaller screens */
+        max-width: calc(100% - 20px);
+    }
+}
 
 
 
 /* --------------------- ABOUT US END----------------------------- */
 
+
+/* ---------------------- Products Start ------------------------------ */
+.product-card {
+    margin-bottom: 20px;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+/* ---------------------- Products End ------------------------------ */
 
 
 /* /--------------------- Contact us ---------------------------------- */

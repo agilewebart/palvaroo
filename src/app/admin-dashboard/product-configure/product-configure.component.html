@@ -51,27 +51,29 @@
                 Product</button>
         </div>
     </div> -->
-    <div class="row my-2">
+    <div class="row my-2  align-items-center">
         <div class="col-md-3">
             <!-- Dropdown filter -->
-            <select class="form-select mb-2 mb-md-0" id="productFilter">
-                <option selected>Filter by Category</option>
-                <option value="all">All Categories</option>
-                <option value="category1">Category 1</option>
-                <option value="category2">Category 2</option>
-                <option value="category3">Category 3</option>
+            <select class="form-select mb-2 mb-md-0"  (change)="categorySearchfn()"
+                [(ngModel)]="productCategory">
+                <option value=0>Filter by Category</option>
+                <option *ngFor="let data of categoryList" [value]="data.id">{{data.category_name}}</option>
             </select>
         </div>
         <div class="col-md-3">
             <!-- Global search -->
             <div class="input-group mb-2 mb-md-0">
-                <input type="text" class="form-control" id="globalSearch" placeholder="Search...">
-                <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
+                <input type="text" class="form-control" placeholder="Search..." style="height: calc(1.5em + .75rem + 2px);"
+                    [(ngModel)]="globalSearch">
+                <button class="btn btn-outline-secondary" type="button"  (click)="globalSearchfn()"><i
+                        class="bi bi-search"></i></button>
             </div>
-    
-            
+
         </div>
-        <div class="col-md-6 text-end">
+        <div class="col-md-2" >
+            <button class="btn btn-danger" title="Reset" (click)="resetAll()"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
+        <div class="col-md-4 text-end">
             <button class="btn btn-primary" id="addProductBtn" (click)="openAddEditModal(addEditModal)">Add
                 Product</button>
         </div>
@@ -81,195 +83,52 @@
         <h3 class="fs-4 mb-3">Product List</h3>
         <div class="col">
             <div style="max-height: 450px; overflow-y: auto;">
-                <table class="table bg-white rounded shadow-sm  table-hover text-center">
+                <table class="table bg-white rounded shadow-sm  table-hover text-center ">
                     <thead>
                         <tr>
+                            <th scope="col" width="5%"> sl.No</th>
                             <th scope="col" width="10%"> Name</th>
                             <th scope="col" width="10%"> Category</th>
-                            <th scope="col" width="20%">Price</th>
-                            <th scope="col" width="30%">Image</th>
+                            <th scope="col" width="10%">Price</th>
+                            <th scope="col" width="15%">Image</th>
+                            <th scope="col" width="20%">Description</th>
+                            <th scope="col" width="5%">Status</th>
                             <th scope="col" width="1%">Action</th>
                         </tr>
                     </thead>
+                    <tbody *ngIf="getProdList.length == 0">
+                        <tr>
+                            <td colspan="7">No data found</td>
+                        </tr>
+                    </tbody>
                     <tbody>
 
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                            <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2"
-                                        (click)="openAddEditModal(addEditModal)">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger" (click)="openDeleteModal(deletemodal)">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </div>
+                        <tr *ngFor="let data  of getProdList;let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{data.productname}}</td>
+                            <td>{{data.categoryname}}</td>
+                            <td>{{data.productprice}}</td>
+                            <td> <img src="{{showProductImgUrl}}{{data.productimg}}" width="30" height="30"> </td>
+                            <td>{{data.productdesc}}</td>
+                            <td>{{data.productstats == 0 ? "Inactive" : data.productstats == 1 ? "Active" :
+                                data.productstats == 2 ? "Deleted" : '' }} 
+                                        <i class="bi bi-arrow-repeat"></i>
                             </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
                             <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                            <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                            <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                            <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                            <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                            <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                            <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                            <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                            <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Television</td>
-                            <td>Jonny</td>
-                            <td>$1200</td>
-                            <td>
-                                <div class="d-grid gap-1 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-warning btn-sm me-md-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
+                                <div class="dropdown">
+                                    <span class="" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </span>
+                                    <ul class="dropdown-menu dropdown-menu-end p-2  "
+                                        aria-labelledby="dropdownMenuButton1">
+                                        <li class="dropdown-item" (click)="openAddEditModal(addEditModal)">
+                                            <i class="bi bi-pencil-fill me-1"></i>Edit
+                                        </li>
+                                        <li class="dropdown-item" (click)="openDeleteModal(deletemodal)">
+                                            <i class="bi bi-trash-fill me-1"></i>Delete
+                                        </li>
+                                    </ul>
                                 </div>
                             </td>
                         </tr>
@@ -282,27 +141,26 @@
     </div>
     <!-- Pagination -->
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-1">
             <label for="itemsPerPage" class="visually-hidden">Items per page</label>
-            <select class="form-select" id="itemsPerPage">
-                <option selected>Items per page</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
+            <select class="form-select" id="itemsPerPage" (change)="changeLimit($event)" [(ngModel)]="limit">
+                <!-- <option value="">Items per page</option> -->
+                <option *ngFor="let data of paginationDropDown" [value]="data.value">{{data.label}}</option>
             </select>
         </div>
-        <div class="col-md-1 text-end">
+        <div class="col-md-1 text-end mx-5">
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-md-end">
-                    <li class="page-item disabled">
+
+                    <li class="page-item" (click)="prevPage()">
                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true"> <i
                                 class="bi bi-arrow-left-short"></i></a>
                     </li>
                     <li class="page-item" aria-current="page">
-                        <a class="page-link" href="#">1 </a>
+                        <a class="page-link">{{currentPage}}</a>
                     </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"><i class="bi bi-arrow-right-short"></i></a>
+                    <li class="page-item" (click)="nextPage()">
+                        <a class="page-link"><i class="bi bi-arrow-right-short"></i></a>
                     </li>
                 </ul>
             </nav>
@@ -345,15 +203,13 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Select Product Category</label>
                         <select class="form-select" [(ngModel)]="productCategory">
-                            <option value="">Select Category</option>
-                            <option>Course 1</option>
-                            <option>Course 2</option>
-                            <option>Course 3</option>
+                            <option value=0>Select Category</option>
+                            <option *ngFor="let data of categoryList" [value]="data.id">{{data.category_name}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Choose product image</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" id="formFile" (change)="uploadFile()">
                     </div>
                 </div>
             </div>
@@ -362,8 +218,8 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Reset</button>
-        <button type="button" class="btn btn-secondary" (click)="onAddSubmit()">Add</button>
+        <button type="button" class="btn btn-danger" (click)="resetAddUpdate()">Reset</button>
+        <button type="button" class="btn btn-primary" (click)="onAddSubmit()">Add</button>
 
     </div>
 </ng-template>

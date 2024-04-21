@@ -66,13 +66,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <li class="nav-item" routerLink="." fragment="hero">
+                            <a class="nav-link " aria-current="page">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="#">About</a>
+                        <li class="nav-item" routerLink="." fragment="aboutUs">
+                            <a class="nav-link " aria-current="page">About</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" routerLink="." fragment="products">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Product
@@ -83,14 +83,21 @@
                                 <li><a class="dropdown-item" href="#">Product 3</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Service</a>
+                        <li class="nav-item" routerLink="." fragment="services">
+                            <a class="nav-link " aria-current="page">Service</a>
+                        </li>
+                        <li class="nav-item" routerLink="." fragment="contactUs">
+                            <a class="nav-link " aria-current="page">Contact</a>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <div class="work-with-me-section">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-facebook"></i>
+                            <i class="bi bi-whatsapp"></i>
+                            <i class="bi bi-envelope"></i>
+                            <button class="btn btn-outline-light">Work with me</button>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -103,7 +110,7 @@
 <!-- ----------------- Main section  ------------------------ -->
 <main>
 
-    <section class="main">
+    <section class="main" id="hero">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 offset-md-6 col-md-6 custom_div">
@@ -117,7 +124,89 @@
         </div>
     </section>
 
-    <section class="contact">
+
+    <section class="about_us" id="aboutUs">
+        <div class="container_about">
+            <div class="sub-container container1">
+                <!-- Content for first container -->
+                <h2>Container 1</h2>
+                <p>I’m Lisa Martin.
+                    I Help Entrepreneurs Build Their Dreams.</p>
+            </div>
+            <div class="sub-container">
+                <!-- Content for second container -->
+                <h2>Container 2</h2>
+                <p>Diam lorem nulla suspendisse id ullamcorper lobortis id sit nisl purus tellus curabitur leo volutpat
+                    vitae quisque eros, gravida magna diam id elit facilisi gravida at non consectetur nulla leo congue
+                    in netus ut et habitant massa id libero turpis.</p>
+            </div>
+            <div class="sub-container">
+                <!-- Content for third container -->
+                <h2>Container 3</h2>
+                <!-- <img src="/assets/images/about_us_img.jpg"> -->
+            </div>
+            <div class="sub-container container4">
+                <!-- Content for fourth container -->
+                <h2>Container 4</h2>
+                <p>Enim accumsan cras semper metus ante vitae massa aliquam nec, diam pulvinar nisl, egestas quam
+                    pharetra nunc magna consequat orci viverra quis aliquam tortor</p>
+            </div>
+        </div>
+    </section>
+
+    <swiper-container  slides-per-view="3" autoplay="true" speed="500" loop="true">
+        <swiper-slide>Slide 1</swiper-slide>
+        <swiper-slide>Slide 2</swiper-slide>
+        <swiper-slide>Slide 3</swiper-slide>
+        <swiper-slide>Slide 3</swiper-slide>
+        <swiper-slide>Slide 3</swiper-slide>
+    </swiper-container>
+
+    <section class="product" id="products">
+        <div class="container">
+            <h2 class="text-center mt-5 mb-4">Our Products</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <img src="https://via.placeholder.com/200" class="card-img-top" alt="Product 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Product 1</h5>
+                            <p class="card-text">Description of Product 1 goes here.</p>
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Product 2</h5>
+                            <p class="card-text">Description of Product 2 goes here.</p>
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card">
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Product 3</h5>
+                            <p class="card-text">Description of Product 3 goes here.</p>
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-primary">Show More Products</button>
+        </div>
+    </section>
+
+
+
+
+    <section class="contact" id="contactUs">
         <div class="contact_container">
             <h2>Contact Us</h2>
             <form>
@@ -133,10 +222,12 @@
                     <label for="message">Message:</label>
                     <textarea id="message" name="message" rows="5" required></textarea>
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit">Send mail</button>
             </form>
         </div>
     </section>
+
+
 </main>
 <!-- ----------------- Main section  END ------------------------ -->
 
