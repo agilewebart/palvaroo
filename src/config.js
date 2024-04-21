@@ -21,8 +21,8 @@ const controllerPath = BASEPATH + '/src/controller/';
 
 //+++++++++++++++++++++++++++++++++++++++++====SERVER AND DB CONFIGS===++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-//--------- DATA_BASE_CONFIG LOCAL FOR MYSQL ----------------
-const DB_CONFIG = {
+//--------- DATA_BASE_CONFIG LOCAL FOR PHPMYADMIN ----------------
+const DB_CONFIG_MYSQL = {
     user: process.env.DB_USER_LOCAL,
     host: process.env.DB_HOST_LOCAL,
     database: process.env.DATABASE_NAME_LOCAL,
@@ -35,6 +35,18 @@ const DB_CONFIG = {
 }
 
 
+//--------- DATA_BASE_CONFIG LOCAL POSTGRES ----------------
+const DB_CONFIG_POSTGRES = {
+    user: process.env.DB_USER_LOCAL_PG,
+    host: process.env.DB_HOST_LOCAL_PG,
+    database: process.env.DATABASE_NAME_LOCAL_PG,
+    password: process.env.DB_PASSWORD_LOCAL_PG,
+    port: process.env.DB_PORT_LOCAL_PG,
+    max: 20,
+    idleTimeoutMillis: 1000,
+    connectionTimeoutMillis: 1000,
+    maxUses: 7500,
+}
 
 
 
@@ -54,7 +66,8 @@ const BACKEND_HOST = {
 
 module.exports = {
     controllerPath: controllerPath,
-    DB_CONFIG: DB_CONFIG,
+    DB_CONFIG_MYSQL: DB_CONFIG_MYSQL,
+    DB_CONFIG_POSTGRES: DB_CONFIG_POSTGRES,
     BACKEND_HOST: BACKEND_HOST,
 }
 

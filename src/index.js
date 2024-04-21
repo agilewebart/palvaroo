@@ -10,7 +10,7 @@ const PORT = config.BACKEND_HOST.PORT || 9000;
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
-app.use(express.static('public'))
+app.use(express.static('./src/uploads'))
 app.use(cors());
 app.use(middleWare.modifyReqWithDateTime)
 
