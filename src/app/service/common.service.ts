@@ -44,5 +44,16 @@ export class CommonService {
     else
       return 10;
   }
-  
+
+
+  getToken(): any {
+    const getTokenFromLocal = localStorage.getItem('yeqtsadkdan');
+    if (getTokenFromLocal) {
+      return getTokenFromLocal;
+    } 
+    else {
+      return null
+    }
+  }
+
 }

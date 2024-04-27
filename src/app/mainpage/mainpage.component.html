@@ -154,52 +154,39 @@
         </div>
     </section>
 
-    <swiper-container  slides-per-view="3" autoplay="true" speed="500" loop="true">
+    <!-- <swiper-container  slides-per-view="3" autoplay="true" speed="500" loop="true">
         <swiper-slide>Slide 1</swiper-slide>
         <swiper-slide>Slide 2</swiper-slide>
         <swiper-slide>Slide 3</swiper-slide>
         <swiper-slide>Slide 3</swiper-slide>
         <swiper-slide>Slide 3</swiper-slide>
-    </swiper-container>
+    </swiper-container> -->
 
-    <section class="product" id="products">
+
+
+    <section class="product_container" id="products">
         <div class="container">
             <h2 class="text-center mt-5 mb-4">Our Products</h2>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="card product-card">
-                        <img src="https://via.placeholder.com/200" class="card-img-top" alt="Product 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Product 1</h5>
-                            <p class="card-text">Description of Product 1 goes here.</p>
-                            <a href="#" class="btn btn-primary">Buy Now</a>
+                <swiper-container slides-per-view="auto" autoplay="true" speed="500" loop="true">
+                    <swiper-slide class="col-lg-4 col-md-6 col-sm-12" *ngFor="let data of someProductsArr">
+                        <div class="card product-card">
+                            <img src="{{showProductImgUrl}}{{data.productimg}}" class="card-img-top"
+                                alt="image load faild">
+                            <div class="card-body">
+                                <h5 class="card-title">{{data.productname}}</h5>
+                                <p class="card-text">{{data.productdesc}}</p>
+                                <!-- <a href="#" class="btn btn-primary" routerLink="." fragment="contactUs">Contact</a> -->
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card product-card">
-                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product 2">
-                        <div class="card-body">
-                            <h5 class="card-title">Product 2</h5>
-                            <p class="card-text">Description of Product 2 goes here.</p>
-                            <a href="#" class="btn btn-primary">Buy Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card product-card">
-                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Product 3</h5>
-                            <p class="card-text">Description of Product 3 goes here.</p>
-                            <a href="#" class="btn btn-primary">Buy Now</a>
-                        </div>
-                    </div>
-                </div>
+                    </swiper-slide>
+                </swiper-container>
+
             </div>
         </div>
         <div class="text-center mt-4">
-            <button class="btn btn-primary">Show More Products</button>
+            <button class="btn btn-primary" routerLink="/allproducts">Show More Products <i
+                    class="bi bi-arrow-right"></i></button>
         </div>
     </section>
 
@@ -209,20 +196,46 @@
     <section class="contact" id="contactUs">
         <div class="contact_container">
             <h2>Contact Us</h2>
-            <form>
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="name"> <span class="text-danger">*</span> Name: </label>
+                    <input type="text" id="name" formControlName="name">
+                    <div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors">
+                        <small class="text-danger" *ngIf="contactForm.get('name')?.errors?.['required']">Name is required.</small>
+                        <small class="text-danger" *ngIf="contactForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</small>
+                      </div>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email"> <span class="text-danger">*</span> Email:</label>
+                    <input type="email" id="email" formControlName="email">
+                    <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.errors">
+                        <small class="text-danger" *ngIf="contactForm.get('email')?.errors?.['required']">Email is required.</small>
+                        <small class="text-danger" *ngIf="contactForm.get('email')?.errors?.['email']">Please enter a valid email.</small>
+                      </div>
                 </div>
                 <div class="form-group">
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <label for="phone"> <span class="text-danger">*</span> Phone:</label>
+                    <input type="text" id="phone" formControlName="phone"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        onkeypress="if(this.value.length > 9) return false;                                    
+                     if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;" maxlength="10">
+                     <div *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.errors">
+                        <small class="text-danger" *ngIf="contactForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+                        <small class="text-danger" *ngIf="contactForm.get('phone')?.errors?.['pattern']">Phone number must be 10 digits.</small>
+                      </div>
                 </div>
-                <button type="submit">Send mail</button>
+               
+                <div class="form-group">
+                    <label for="message"> <span class="text-danger">*</span> Message:</label>
+                    <textarea id="message" name="message" rows="5" formControlName="message"></textarea>
+                    <div *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.errors">
+                        <small class="text-danger" *ngIf="contactForm.get('message')?.errors?.['required']">Message is required.</small>
+                        <small class="text-danger" *ngIf="contactForm.get('message')?.errors?.['minlength']">Message must be at least 10 characters long.</small>
+                      </div>
+                </div>
+                <button type="submit" [ngClass]="{'btn_disabled_color':!contactForm.valid}"
+                    [disabled]="!contactForm.valid">Send
+                    mail</button>
             </form>
         </div>
     </section>
@@ -275,3 +288,6 @@
         </div>
     </div>
 </footer>
+
+
+<notifier-container></notifier-container>

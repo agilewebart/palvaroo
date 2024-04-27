@@ -14,7 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+ 
 import { register } from 'swiper/element/bundle';
 register();
 
@@ -41,8 +42,48 @@ register();
 // };
 
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
 
-
+const customNotifierOptions: NotifierOptions = {
+  position: {
+    horizontal: {
+      position: 'middle',
+      distance: 12
+    },
+    vertical: {
+      position: 'top',
+      distance: 12,
+      gap: 10
+    }
+  },
+  theme: 'material',
+  behaviour: {
+    autoHide: 5000,
+    onClick: 'hide',
+    onMouseover: 'pauseAutoHide',
+    showDismissButton: true,
+    stacking: 4
+  },
+  animations: {
+    enabled: true,
+    show: {
+      preset: 'slide',
+      speed: 300,
+      easing: 'ease'
+    },
+    hide: {
+      preset: 'fade',
+      speed: 300,
+      easing: 'ease',
+      offset: 50
+    },
+    shift: {
+      speed: 300,
+      easing: 'ease'
+    },
+    overlap: 150
+  }
+};
 
 @NgModule({
   declarations: [
@@ -51,7 +92,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     LoginComponent,
     NotfoundComponent,
     ProductshowcaseComponent,
-    PrelaoderComponent
+    PrelaoderComponent,
   ],
   imports: [
     CommonModule,
@@ -60,11 +101,16 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     NgbModule,
     HttpClientModule,
     NgxSpinnerModule,
+    NotifierModule.withConfig(customNotifierOptions),
+    ReactiveFormsModule,
+    FormsModule,
+
     // NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    NgxUiLoaderModule
+    NgxUiLoaderModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

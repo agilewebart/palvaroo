@@ -1,0 +1,179 @@
+<div class="container mt-3">
+    <div class="row my-4 align-items-center">
+        <div class="col-md-4">
+            <!-- Dropdown filter -->
+            <select class="form-select mb-2 mb-md-0" >
+                <option value=0>Filter by Category</option>
+                
+            </select>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group mb-2 mb-md-0">
+                <input type="text" class="form-control" placeholder="Search..."
+                    style="height: calc(1.5em + .75rem + 2px);">
+                <button class="btn btn-outline-secondary" type="button"><i
+                        class="bi bi-search"></i></button>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-danger" title="Reset" ><i
+                    class="bi bi-arrow-clockwise"></i></button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid mt-4" >
+    <div class="row" style="max-height: 500px; overflow-y: auto;">
+        <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div> <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div> <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div> <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div> <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div> <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div> <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div> <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- You can add more cards here with the same structure -->
+    </div>
+
+     <!-- Pagination -->
+     <div class="row">
+        <div class="col-md-1">
+            <label for="itemsPerPage" class="visually-hidden">Items per page</label>
+            <select class="form-select" id="itemsPerPage" (change)="changeLimit($event)" [(ngModel)]="limit">
+                <option value="">Items per page</option>
+                <option *ngFor="let data of paginationDropDown" [value]="data.value">{{data.label}}</option>
+            </select>
+        </div>
+        <div class="col-md-1 text-end mx-5">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-md-end">
+
+                    <li class="page-item" (click)="prevPage()">
+                        <a class="page-link" > <i class="bi bi-arrow-left-short"></i></a>
+                    </li>
+                    <!-- <li class="page-item" aria-current="page">
+                        <a class="page-link">{{currentPage}}</a>
+                    </li> -->
+                    <li class="page-item" (click)="nextPage()">
+                        <a class="page-link"><i class="bi bi-arrow-right-short"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>
+
+<!-- <div class="container mt-3">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item ">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div> -->

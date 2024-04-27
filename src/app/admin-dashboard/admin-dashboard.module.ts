@@ -29,13 +29,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { EnquirylistComponent } from './enquirylist/enquirylist.component';
 
 
 
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
-      position: 'right',
+      position: 'middle',
       distance: 12
     },
     vertical: {
@@ -77,6 +78,7 @@ const customNotifierOptions: NotifierOptions = {
   declarations: [
     AdminDashboardComponent,
     ProductConfigureComponent,
+    EnquirylistComponent,
   ],
   imports: [
     CommonModule,

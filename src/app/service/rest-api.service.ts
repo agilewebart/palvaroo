@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonService } from './common.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestApiService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private common: CommonService) { }
 
   public httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      // 'Authorization': `Bearer ${this.common.getToken()}`
+    })
+  };
+
+  public httpOptions_2 = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.common.getToken()}`
     })
   };
 
@@ -24,13 +31,29 @@ export class RestApiService {
   // API = 'http://127.0.0.1:7000/api'
 
 
+  //------------- LOGIN ----------------------
+  userLoginV1(data: any) {
+    return this._http.post(this.API + '/v1/loginuser', data, this.httpOptions);
+  }
+
+  //------------- ADMIN ROUTES ------------------
   uploadImage(data: any) {
     return this._http.post(this.API + '/v1/productimageupload', data);
   }
 
   addNewProduct(data: any) {
-    return this._http.post(this.API + '/v1/addNewProduct', data, this.httpOptions);
+    return this._http.post(this.API + '/v1/addNewProduct', data, this.httpOptions_2);
   }
+
+  updateProduct(data: any) {
+    return this._http.post(this.API + '/v1/updateProduct', data, this.httpOptions_2);
+  }
+
+  deleteProduct(data: any) {
+    return this._http.post(this.API + '/v1/deleteProduct', data, this.httpOptions_2);
+  }
+  //------------- ADMIN ROUTES END------------------
+
 
   getCategoryList(data: any) {
     return this._http.post(this.API + '/v1/getAllCategory', data, this.httpOptions);
@@ -38,5 +61,9 @@ export class RestApiService {
 
   getAllProductList(data: any) {
     return this._http.post(this.API + '/v1/getAllProducts', data, this.httpOptions);
+  }
+
+  sendEmail(data: any): Observable<any> {
+    return this._http.post(this.API + '/v1/sendmail', data, this.httpOptions);
   }
 }
