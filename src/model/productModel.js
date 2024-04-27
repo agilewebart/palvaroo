@@ -12,7 +12,27 @@ module.exports.add_new_product = async (body) => {
             return respStruct.responseStruct(0, false, 400, "Some error occur", null);
         }
         else {
-            return respStruct.responseStruct(1, true, 200, "Data inserted successfullt", null);
+            return respStruct.responseStruct(1, true, 200, "Data inserted successfully", null);
+        }
+
+    }
+    catch (err) {
+        console.log("-------------- Modal error---> ", err);
+        return respStruct.responseStruct(0, false, 500, 'Internal server error', false);
+    }
+}
+
+//---------------------- Add new product ----------------------
+module.exports.update_product = async (body) => {
+    try {
+
+        let reqBody = body;
+        let result = await productDao.updateProduct(reqBody);
+        if (result == -500) {
+            return respStruct.responseStruct(0, false, 400, "Some error occur", null);
+        }
+        else {
+            return respStruct.responseStruct(1, true, 200, "Data Updated successfully", null);
         }
 
     }
@@ -33,7 +53,7 @@ module.exports.delete_product = async (body) => {
             return respStruct.responseStruct(0, false, 400, "Some error occur", null);
         }
         else {
-            return respStruct.responseStruct(1, true, 200, "Data Delete successfullt", null);
+            return respStruct.responseStruct(1, true, 200, "Data Delete successfully", null);
         }
 
     }

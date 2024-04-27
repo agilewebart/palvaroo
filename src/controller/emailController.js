@@ -14,7 +14,7 @@ router.post('/v1/sendmail', async (req, res) => {
             return res.status(fnlRes.fendStuct.status).json({ success: fnlRes.fendStuct.success, status: fnlRes.fendStuct.status, message: fnlRes.fendStuct.message, response: fnlRes.fendStuct.response })
         }
         else {
-            return res.status(fnlRes.fendStuct.status).json({ success: fnlRes.fendStuct.success, status: fnlRes.fendStuct.status, message: fnlRes.fendStuct.message, response: resP.fendStuct.response })
+            return res.status(fnlRes.fendStuct.status).json({ success: fnlRes.fendStuct.success, status: fnlRes.fendStuct.status, message: fnlRes.fendStuct.message, response: fnlRes.fendStuct.response })
         }
 
         //--------- Store Mail info in enquiry table -------------
@@ -22,7 +22,7 @@ router.post('/v1/sendmail', async (req, res) => {
 
     } catch (err) {
         console.log("--------_email error-->", err);
-        return res.status(500).json({ success: true, status: 500, message: "Internal Server error" })
+        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
 
     }
 })

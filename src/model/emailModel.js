@@ -45,7 +45,7 @@ module.exports.send_mail = async (body) => {
             subject: `Hey Monoj you got and enquiry from ${reqBody.name}`,
             // text: `This is your enquiry email ${reqBody.email}`,
             html: `
-            This is your enquiry email ${reqBody.email}
+            This is your enquiry email ${reqBody.email} and phone number ${reqBody.phone}
             <br>
             <hr>
             <b>${reqBody.message}</b>

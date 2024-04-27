@@ -9,9 +9,9 @@ module.exports.store_email_enquiry = async (body) => {
         let reqDao = body;
         let sqlQry;
         let qryArr = [];
-        sqlQry = `INSERT INTO enquiry (enquiryname, enquiryemail, enquirymsg, enquiryat)
-                  VALUES ($1,$2,$3,$4);`
-        qryArr = [reqDao.name, reqDao.email, reqDao.message, reqDao.currentDateTime];
+        sqlQry = `INSERT INTO enquiry (enquiryname, enquiryemail, enquiryphone, enquirymsg, enquiryat)
+                  VALUES ($1,$2,$3,$4,$5);`
+        qryArr = [reqDao.name, reqDao.email, reqDao.phone, reqDao.message, reqDao.currentDateTime];
 
         const result = await writePool.query(sqlQry, qryArr);
         return result.rowCount;

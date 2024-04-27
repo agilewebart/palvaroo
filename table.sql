@@ -56,6 +56,7 @@ CREATE TABLE users (
  id SERIAL PRIMARY KEY,
  phone VARCHAR(15) NOT NULL,
  password VARCHAR(500) NOT NULL,
+ usertype VARCHAR(15) NOT NULL,
  status INT NOT NULL DEFAULT 1
 );
 
@@ -84,6 +85,7 @@ CREATE TABLE enquiry (
  id SERIAL PRIMARY KEY,
  enquiryname VARCHAR(255) NOT NULL,
  enquiryemail VARCHAR(255) NOT NULL,
+ enquiryphone VARCHAR(255) NOT NULL,
  enquirymsg VARCHAR(500) NOT NULL,
  enquiryat VARCHAR(100) NOT NULL
 );

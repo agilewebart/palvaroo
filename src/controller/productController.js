@@ -19,7 +19,7 @@ router.post('/v1/productimageupload', imgUpload.upload.single('file_name'), asyn
 
     } catch (err) {
         console.log("-------File Controller Error --> ", err);
-        return res.status(500).json({ success: true, status: 500, message: "Internal Server error" })
+        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
     }
 })
 
@@ -37,7 +37,24 @@ router.post('/v1/addNewProduct', async (req, res) => {
 
     } catch (err) {
         console.log("-------Add Controller Error --> ", err);
-        return res.status(500).json({ success: true, status: 500, message: "Internal Server error" })
+        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
+    }
+});
+
+//-------------- Update Product --------------------------
+router.post('/v1/updateProduct', async (req, res) => {
+    try {
+        let body = req.body;
+        let finalResult = await productModel.update_product(body);
+
+        if (finalResult.bkendFlag == 1) {
+            return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+        }
+        return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+
+    } catch (err) {
+        console.log("-------Add Controller Error --> ", err);
+        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
 
@@ -46,6 +63,10 @@ router.post('/v1/addNewProduct', async (req, res) => {
 router.post('/v1/deleteProduct', async (req, res) => {
     try {
         let body = req.body;
+        if (body.pdId == null && body.pdId == undefined && body.pdId == "") {
+            return res.status(200).json({ success: false, status: 1004, message: "Parameter missing", response: "" })
+        }
+
         let finalResult = await productModel.delete_product(body);
 
         if (finalResult.bkendFlag == 1) {
@@ -55,7 +76,7 @@ router.post('/v1/deleteProduct', async (req, res) => {
 
     } catch (err) {
         console.log("-------Add Controller Error --> ", err);
-        return res.status(500).json({ success: true, status: 500, message: "Internal Server error" })
+        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
 
@@ -74,7 +95,7 @@ router.post('/v1/getAllProducts', async (req, res) => {
 
     } catch (err) {
         console.log("-------Add Controller Error --> ", err);
-        return res.status(500).json({ success: true, status: 500, message: "Internal Server error" })
+        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
 
@@ -95,7 +116,7 @@ router.post('/v1/getAllCategory', async (req, res) => {
 
     } catch (err) {
         console.log("-------Add Controller Error --> ", err);
-        return res.status(500).json({ success: true, status: 500, message: "Internal Server error" })
+        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
 
