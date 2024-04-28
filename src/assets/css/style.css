@@ -499,8 +499,10 @@ button:hover {
 }
 
 .list-group-item {
+    width: 50%;
     border: none;
     padding: 20px 30px;
+    
 }
 
 .list-group-item.active {

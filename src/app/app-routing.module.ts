@@ -4,6 +4,7 @@ import { MainpageComponent } from './mainpage/mainpage.component';
 import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ProductshowcaseComponent } from './productshowcase/productshowcase.component';
+import { authGuard } from './allguards/auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -16,9 +17,13 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-     path:'allproducts', component:ProductshowcaseComponent
+    path: 'allproducts', component: ProductshowcaseComponent
   },
-  { path: 'admindashboard', loadChildren: () => import('./admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule) },
+  {
+    path: 'admindashboard',
+    canActivate: [authGuard],
+    loadChildren: () => import('./admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
+  },
   {
     path: '**', component: NotfoundComponent
   }

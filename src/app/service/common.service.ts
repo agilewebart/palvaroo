@@ -50,10 +50,20 @@ export class CommonService {
     const getTokenFromLocal = localStorage.getItem('yeqtsadkdan');
     if (getTokenFromLocal) {
       return getTokenFromLocal;
-    } 
+    }
     else {
       return null
     }
+  }
+
+
+
+  clearLocalStorage() {
+    localStorage.clear()
+  }
+  
+  clearSessionStroage() {
+    sessionStorage.clear();
   }
 
 }

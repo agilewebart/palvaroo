@@ -42,6 +42,7 @@ export class RestApiService {
   }
 
   addNewProduct(data: any) {
+    console.log("----------> ",this.httpOptions_2)
     return this._http.post(this.API + '/v1/addNewProduct', data, this.httpOptions_2);
   }
 

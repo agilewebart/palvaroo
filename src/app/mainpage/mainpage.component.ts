@@ -27,7 +27,6 @@ export class MainpageComponent implements OnInit {
   ngOnInit(): void {
     this.initializeContactForm();
     this._activeRoute.fragment.subscribe((res: any) => {
-      console.log(res)
       this.jumpToSpecificSection(res);
     })
     this.showProductImgUrl = this._rest.IMG_API;
@@ -58,7 +57,7 @@ export class MainpageComponent implements OnInit {
       "offset": 0,
       "globalSearch": "",
       "categorySearchId": "",
-      "userType": "client"
+      // "userType": ""
     }
 
     this._rest.getAllProductList(reqPayload).subscribe((res: any) => {

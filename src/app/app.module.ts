@@ -12,6 +12,7 @@ import { PrelaoderComponent } from './prelaoder/prelaoder.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpInterceptorService } from './service/http-interceptor.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -43,6 +44,7 @@ register();
 
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
+
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -109,7 +111,13 @@ const customNotifierOptions: NotifierOptions = {
     NgxUiLoaderModule,
     
   ],
-  providers: [],
+  providers: [
+    {
+      provide   : HTTP_INTERCEPTORS,
+      useClass  : HttpInterceptorService,
+      multi     : true
+    }
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -38,14 +38,12 @@ export class LoginComponent {
     }
 
     this._rest.userLoginV1(reqPayload).subscribe((res: any) => {
-      console.log("---login res===> ",res)
       if (res.status == 200 && res.response) {
         this._notifierSerVice.notify('success', res.message);
-        localStorage.setItem("yeqtsadkdan", JSON.stringify(res.response.token));
+        localStorage.setItem("yeqtsadkdan", res.response.token);
         this._router.navigate(['/admindashboard/productconfig']);
       }
       else {
-      console.log("---login res===> ",res)
         this._notifierSerVice.notify('error', res.message);
       }
     })

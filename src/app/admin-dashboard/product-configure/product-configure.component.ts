@@ -100,12 +100,11 @@ export class ProductConfigureComponent implements OnInit {
 
     const reqPayload = {
       "limit": this.limit.toString() ? this.limit.toString() : "15",
-      // "limit": 1,
       "offset": this.offset.toString() ? this.offset.toString() : "0",
       "globalSearch": this.globalSearch.toLowerCase().trim() == 'active' ? 1 : this.globalSearch.toLowerCase().trim() == 'inactive' ? 0 : this.globalSearch.toLowerCase().trim() == 'deleted' ? 2 : this.globalSearch,
       "categorySearchId": this.searchproductCategoryid,
       // "status": "1"
-      "userType": "admin"
+      "userType": "admin" // for active,inactive,delete search
     }
 
     console.log("-------->> ", reqPayload)
@@ -198,7 +197,7 @@ export class ProductConfigureComponent implements OnInit {
 
     // console.log("-------Req------?>> ", reqPayload)
     this._rest.addNewProduct(reqPayload).subscribe((res: any) => {
-      // console.log("-------Res------?>> ", res)
+      console.log("-------Res------?>> ", res)
       if (res.status == 200) {
         this.closeModal();
         this.notifier.notify('success', res.message);
@@ -269,7 +268,7 @@ export class ProductConfigureComponent implements OnInit {
         this.getAllProducts();
       }
       else {
-        this.notifier.notify('success', res.message)
+        this.notifier.notify('error', res.message)
       }
     })
 
