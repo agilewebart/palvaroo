@@ -65,7 +65,7 @@ module.exports.deleteProduct = async (reqBody) => {
 
         let req = reqBody;
 
-        console.log("----------------------------->> ", req)
+        // console.log("----------------------------->> ", req)
         let qryArr = [req.currentDateTime, req.pdId];
         let sqlQry;
         sqlQry = `UPDATE products SET status = ${2} , modifiedat = $1  WHERE id = $2`
@@ -106,7 +106,7 @@ module.exports.getAllProducts = async (reqBody) => {
 
 
         // console.log("-------->> req---> ", req)
-        console.log(typeof req.categorySearchId);
+        // console.log(typeof req.categorySearchId);
 
         if (req.categorySearchId != null && req.categorySearchId != undefined && req.categorySearchId != "" && req.categorySearchId != 0) {
             // qryArr = [];

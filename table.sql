@@ -72,6 +72,21 @@ CREATE TABLE products (
  modifiedat VARCHAR(100) NOT NULL,
  status INT NOT NULL DEFAULT 1
 );
+--------------- 
+CREATE TABLE IF NOT EXISTS public.products
+(
+    id integer NOT NULL DEFAULT nextval('products_id_seq'::regclass),
+    name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    description character varying(500) COLLATE pg_catalog."default" NOT NULL,
+    category_id integer NOT NULL,
+    price character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    image_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    createdat character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    modifiedat character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    status integer NOT NULL DEFAULT 1,
+    CONSTRAINT products_pkey PRIMARY KEY (id)
+)
+--------------- 
 
 -- Category Table ------
 CREATE TABLE category (

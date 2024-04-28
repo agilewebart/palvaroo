@@ -13,7 +13,7 @@ module.exports.user_log_in = async (reqBody) => {
         }
         else {
             if (dbRes.rowCount == 0) {
-                return respStruct.responseStruct(1, true, 200, "Invalid Phone number or password", null);
+                return respStruct.responseStruct(1, true, 200, "Invalid credentials", null);
             } else {
                 const temp = dbRes.rows[0];
                 const tempPayload = {
@@ -22,6 +22,11 @@ module.exports.user_log_in = async (reqBody) => {
                     userType: temp.usertype
                 }
                 const generateToken = await gToken.generateNewToken(tempPayload);
+
+                if (generateToken == -999) {
+                    return respStruct.responseStruct(0, false, 400, "login after some times", null);
+                }
+                
                 const reDefineRes = {
                     token: generateToken,
                     userPhone: temp.phone,

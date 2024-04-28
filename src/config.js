@@ -68,12 +68,17 @@ const JWT_SECRECTS = {
     jwt_secrects_key: process.env.JWT_SECRECT_KEY || "563125hgvasfeftgasqfghgdvfasf2312312vgvc"
 };
 
+
+const IS_ADMIN = {
+    isAdmin: process.env.IS_ADMIN || 'admin'
+}
 module.exports = {
     controllerPath: controllerPath,
     DB_CONFIG_MYSQL: DB_CONFIG_MYSQL,
     DB_CONFIG_POSTGRES: DB_CONFIG_POSTGRES,
     BACKEND_HOST: BACKEND_HOST,
-    JWT_SECRECTS: JWT_SECRECTS
+    JWT_SECRECTS: JWT_SECRECTS,
+    IS_ADMIN: IS_ADMIN
 }
 
 

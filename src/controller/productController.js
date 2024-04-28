@@ -3,6 +3,8 @@ const router = express.Router();
 const constant = require('../constants/statusCode');
 const productModel = require('../model/productModel');
 const imgUpload = require('../utility/imageUploader');
+const gToken = require('../middleware/jwt');
+
 
 
 
@@ -13,54 +15,54 @@ router.post('/v1/productimageupload', imgUpload.upload.single('file_name'), asyn
         let body = req.file;
         const fileName = body.filename;
         if (fileName) {
-            return res.status(constant.statusCode.SUCCESS).json({ success: true, status: constant.statusCode.SUCCESS, message: '', response: fileName })
+            return res.status(200).json({ success: true, status: constant.statusCode.SUCCESS, message: '', response: fileName })
         }
-        return res.status(constant.statusCode.SOME_ERROR_OCCUR).json({ success: true, status: constant.statusCode.SOME_ERROR_OCCUR, message: 'Some error occur', response: null })
+        return res.status(200).json({ success: true, status: constant.statusCode.SOME_ERROR_OCCUR, message: 'Some error occur', response: null })
 
     } catch (err) {
         console.log("-------File Controller Error --> ", err);
-        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
+        return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
     }
 })
 
 
 //-------------- Add new Product --------------------------
-router.post('/v1/addNewProduct', async (req, res) => {
+router.post('/v1/addNewProduct', gToken.jwtAuthMiddleWare, gToken.ch3ckRole, async (req, res) => {
     try {
         let body = req.body;
         let finalResult = await productModel.add_new_product(body);
 
         if (finalResult.bkendFlag == 1) {
-            return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+            return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
         }
-        return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+        return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
 
     } catch (err) {
         console.log("-------Add Controller Error --> ", err);
-        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
+        return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
 
 //-------------- Update Product --------------------------
-router.post('/v1/updateProduct', async (req, res) => {
+router.post('/v1/updateProduct', gToken.jwtAuthMiddleWare, gToken.ch3ckRole, async (req, res) => {
     try {
         let body = req.body;
         let finalResult = await productModel.update_product(body);
 
         if (finalResult.bkendFlag == 1) {
-            return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+            return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
         }
-        return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+        return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
 
     } catch (err) {
         console.log("-------Add Controller Error --> ", err);
-        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
+        return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
 
 
 //-------------- Delete Product --------------------------
-router.post('/v1/deleteProduct', async (req, res) => {
+router.post('/v1/deleteProduct', gToken.jwtAuthMiddleWare, gToken.ch3ckRole, async (req, res) => {
     try {
         let body = req.body;
         if (body.pdId == null && body.pdId == undefined && body.pdId == "") {
@@ -70,13 +72,13 @@ router.post('/v1/deleteProduct', async (req, res) => {
         let finalResult = await productModel.delete_product(body);
 
         if (finalResult.bkendFlag == 1) {
-            return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+            return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
         }
-        return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+        return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
 
     } catch (err) {
         console.log("-------Add Controller Error --> ", err);
-        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
+        return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
 
@@ -89,13 +91,13 @@ router.post('/v1/getAllProducts', async (req, res) => {
         let finalResult = await productModel.get_all_products(body);
 
         if (finalResult.bkendFlag == 1) {
-            return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+            return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
         }
-        return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+        return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
 
     } catch (err) {
         console.log("-------Add Controller Error --> ", err);
-        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
+        return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
 
@@ -110,13 +112,13 @@ router.post('/v1/getAllCategory', async (req, res) => {
         let finalResult = await productModel.get_all_Category(body);
 
         if (finalResult.bkendFlag == 1) {
-            return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+            return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
         }
-        return res.status(finalResult.fendStuct.status).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+        return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
 
     } catch (err) {
         console.log("-------Add Controller Error --> ", err);
-        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
+        return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
 

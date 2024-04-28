@@ -5,27 +5,48 @@ const config = require('../config')
 module.exports.jwtAuthMiddleWare = async (req, res, next) => {
     try {
 
-        // Extract Jwt from request headers bearer token;
-        const token = req.headers.authorization.split(' ')[1]; // getting token from client;
-        if (!token) return res.status(401).json({ success: false, status: 401, message: "Unauthorize user", response: null });
+        const authorizationHeader = req.headers['authorization'];
+        if (!authorizationHeader) return res.status(200).json({ success: false, status: 403, message: "Authheader not found" })
 
-        // If token is present ----
-        const decodedTokenPayload = jwt.verify(token, config.JWT_SECRECTS.jwt_secrects_key);
 
-        // Attched user Info to the request obj ----
-        if (decodedTokenPayload) {
-            req.userToken = decodedTokenPayload;
-            next();
+        const token = authorizationHeader && authorizationHeader.split(' ')[1];
+        // console.log( typeof token)
+        if (token == "null" || token == undefined || token == "" || token == null) {
+            return res.status(200).json({ success: false , status: 401, message: 'Unauthorize token' })
         }
         else {
-            return res.status(400).json({ success: false, status: 400, message: "Invalid token" })
+            const decodedTokenPayload = jwt.verify(token, config.JWT_SECRECTS.jwt_secrects_key);
+
+            if (decodedTokenPayload) {
+                req.userToken = decodedTokenPayload;
+                next();
+            }
+            else {
+                res.status(200).json({ success: false , status: 400, message: "Some error occur" })
+            }
         }
-
-
     }
     catch (err) {
         console.log("------ Error from JWT middlware--> ", err);
-        return res.status(500).json({ success: false, status: 500, message: "Internal Server error" })
+        return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
+    }
+}
+
+//-------------- Validated role--------
+module.exports.ch3ckRole = async (req, res, next) => {
+    try {
+        const whichRole = await req.userToken.userType.trim();
+
+        if (whichRole == config.IS_ADMIN.isAdmin) {
+            next();
+        }
+        else {
+            return res.status(200).json({ success: false, status: 401, message: 'Unauthorize User' })
+        }
+
+    } catch (err) {
+        console.log("------ Error from role checking--> ", err);
+        return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
     }
 }
 
@@ -36,6 +57,6 @@ module.exports.generateNewToken = async (userDataObj) => {
     }
     catch (err) {
         console.log("------ Error from generating token--> ", err);
-        return { message: "token generation failed", status: -999 }
+        return  -999; 
     }
 }

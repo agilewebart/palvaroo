@@ -65,6 +65,6 @@ module.exports.send_mail = async (body) => {
 
     } catch (err) {
         console.error("-----Email model Err--->", err);
-        // return respStruct.responseStruct(0, false, 500, 'Internal server error', false);
+        return respStruct.responseStruct(0, false, 500, 'Internal server error', false);
     }
 };
