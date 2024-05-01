@@ -1,26 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top custom_nav_show_prod">
     <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler order-lg-2" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-around" id="navbarSupportedContent">
-            <div  class="d-flex mb-2 mb-md-0">
-                <span class="btn btn-primary" routerLink="/home" ><i class="bi bi-arrow-left"></i></span>
+        <div class="collapse navbar-collapse justify-content-between order-lg-1" id="navbarSupportedContent">
+            <div class="d-flex mb-2 mb-lg-0">
+                <span class="btn btn-primary" routerLink="/home"><i class="bi bi-arrow-left"></i></span>
             </div>
-            <div class="d-flex mb-2 mb-md-0">
-                <input class="form-control me-2" type="search" placeholder="Global search" aria-label="Search">
+            <div class="d-flex justify-content-center mb-2 mb-lg-0 col-lg-6">
+                <input class="form-control " type="search" placeholder="Global search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i> </button>
             </div>
-            <div class="d-flex mb-2 mb-md-0">
-                <select class="form-select" aria-label="Default select example">
+            <div class="d-flex mb-2 mb-lg-0">
+                <!-- <select class="form-select mx-3" aria-label="Default select example">
                     <option selected>Filter with product category</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
+                </select> -->
+                <select class="form-select mx-3" (change)="categorySearchfn()" [(ngModel)]="searchproductCategoryid">
+                    <option value=0>Filter by Category</option>
+                    <option *ngFor="let data of categoryList" [value]="data.id">{{data.category_name}}</option>
                 </select>
+                <button class="btn btn-danger" type="button" (click)="resetAll()"><i
+                        class="bi bi-arrow-clockwise"></i></button>
             </div>
-
         </div>
     </div>
 </nav>
@@ -29,114 +35,28 @@
 
 <div class="container-fluid">
     <div class="card-container">
-        <div class="card">
-            <img src="assets/images/download_original.jpg" alt="Product Image">
+        <div class="card" *ngFor="let data  of getProdList;let i = index">
+            <img src="{{showProductImgUrl}}{{data.productimg}}" alt="Product Image">
             <div class="card-content">
-                <h2 class="card-title">Product Title 1</h2>
-                <p class="product-price">$19.99</p>
-                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.....</p>
+                <h2 class="card-title">{{data.productname}}</h2>
+                <p class="product-price">{{data.productprice}}</p>
+                <p class="product-description">{{data.productdesc}}</p>
                 <div class="row">
-                    <div class="col-md-12"> <small class="category">#Clothing</small></div>
+                    <div class="col-md-12"> <small class="category">{{data.categoryname}}</small></div>
                 </div>
                 <div class="row my-2">
-                    <div class="col-md-6"> <a href="#" class="contact-button">Contact </a></div>
-                    <div class="col-md-6"> <a href="#" class="contact-button">Details</a></div>
+                    <div class="col-md-6"> <button class="contact-button" (click)="contactModalOpen(data.productname)">Contact </button>
+                    </div>
+                    <div class="col-md-6"> <button class="contact-button">Details</button></div>
                 </div>
+            </div>
+        </div>
+        <div class="card " *ngIf="getProdList.length  == 0">
+            <div class="card-content">
+                <h3 class="card-title text-center">No product found</h3>
             </div>
         </div>
 
-
-        <div class="card">
-            <img src="assets/images/download_original.jpg" alt="Product Image">
-            <div class="card-content">
-                <h2 class="card-title">Product Title 1</h2>
-                <p class="product-price">$19.99</p>
-                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.....</p>
-                <div class="row">
-                    <div class="col-md-12"> <small class="category">#Clothing</small></div>
-                </div>
-                <div class="row my-2">
-                    <div class="col-md-6"> <a href="#" class="contact-button">Contact </a></div>
-                    <div class="col-md-6"> <a href="#" class="contact-button">Details</a></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="assets/images/download_original.jpg" alt="Product Image">
-            <div class="card-content">
-                <h2 class="card-title">Product Title 1</h2>
-                <p class="product-price">$19.99</p>
-                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.....</p>
-                <div class="row">
-                    <div class="col-md-12"> <small class="category">#Clothing</small></div>
-                </div>
-                <div class="row my-2">
-                    <div class="col-md-6"> <a href="#" class="contact-button">Contact </a></div>
-                    <div class="col-md-6"> <a href="#" class="contact-button">Details</a></div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <img src="assets/images/download_original.jpg" alt="Product Image">
-            <div class="card-content">
-                <h2 class="card-title">Product Title 1</h2>
-                <p class="product-price">$19.99</p>
-                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.....</p>
-                <div class="row">
-                    <div class="col-md-12"> <small class="category">#Clothing</small></div>
-                </div>
-                <div class="row my-2">
-                    <div class="col-md-6"> <a href="#" class="contact-button">Contact </a></div>
-                    <div class="col-md-6"> <a href="#" class="contact-button">Details</a></div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <img src="assets/images/download_original.jpg" alt="Product Image">
-            <div class="card-content">
-                <h2 class="card-title">Product Title 1</h2>
-                <p class="product-price">$19.99</p>
-                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.....</p>
-                <div class="row">
-                    <div class="col-md-12"> <small class="category">#Clothing</small></div>
-                </div>
-                <div class="row my-2">
-                    <div class="col-md-6"> <a href="#" class="contact-button">Contact </a></div>
-                    <div class="col-md-6"> <a href="#" class="contact-button">Details</a></div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <img src="assets/images/download_original.jpg" alt="Product Image">
-            <div class="card-content">
-                <h2 class="card-title">Product Title 1</h2>
-                <p class="product-price">$19.99</p>
-                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.....</p>
-                <div class="row">
-                    <div class="col-md-12"> <small class="category">#Clothing</small></div>
-                </div>
-                <div class="row my-2">
-                    <div class="col-md-6"> <a href="#" class="contact-button">Contact </a></div>
-                    <div class="col-md-6"> <a href="#" class="contact-button">Details</a></div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <img src="assets/images/download_original.jpg" alt="Product Image">
-            <div class="card-content">
-                <h2 class="card-title">Product Title 1</h2>
-                <p class="product-price">$19.99</p>
-                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.....</p>
-                <div class="row">
-                    <div class="col-md-12"> <small class="category">#Clothing</small></div>
-                </div>
-                <div class="row my-2">
-                    <div class="col-md-6"> <a href="#" class="contact-button">Contact </a></div>
-                    <div class="col-md-6"> <a href="#" class="contact-button">Details</a></div>
-                </div>
-            </div>
-        </div>
 
         <!-- Add more cards here as needed -->
     </div>
@@ -144,27 +64,24 @@
 
     <!-- ----Pagination -->
     <div class="row d-flex justify-content-center my-4">
-        <div class="col-md-2 mb-2 mb-md-0 mx-3">
-            <!-- <label for="itemsPerPage" class="visually-hidden">Items per page</label> -->
-            <select class="form-select" id="itemsPerPage">
-                <!-- <option selected>Items per page</option>     -->
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
+        <div class="col-md-3 col-lg-2 col-xl-1">
+            <label for="itemsPerPage" class="visually-hidden">Items per page</label>
+            <select class="form-select" id="itemsPerPage" (change)="changeLimit($event)" [(ngModel)]="limit">
+                <option *ngFor="let data of paginationDropDown" [value]="data.value">{{data.label}}</option>
             </select>
         </div>
-        <div class="col-md-1 text-end mb-2 mb-md-0 mx-3">
+        <div class="col-md-3 col-lg-2 col-xl-2 text-md-end mt-3 mt-md-0">
             <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-md-end">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"> <i
-                                class="bi bi-arrow-left-short"></i></a>
+                <ul class="pagination justify-content-md-end mb-0">
+
+                    <li class="page-item" (click)="prevPage()">
+                        <a class="page-link"> <i class="bi bi-arrow-left-short"></i></a>
                     </li>
                     <li class="page-item" aria-current="page">
-                        <a class="page-link" href="#">1 </a>
+                        <a class="page-link">{{currentPage}}</a>
                     </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"><i class="bi bi-arrow-right-short"></i></a>
+                    <li class="page-item" (click)="nextPage()">
+                        <a class="page-link"><i class="bi bi-arrow-right-short"></i></a>
                     </li>
                 </ul>
             </nav>
@@ -172,3 +89,69 @@
     </div>
 
 </div>
+
+
+<ng-template #enquiryModal>
+    <div class="modal-header">
+        <h4 class="modal-title">Enquiry Form</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name"> <span class="text-danger">*</span> Your Name: </label>
+                <input type="text" id="name" formControlName="name">
+                <div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors">
+                    <small class="text-danger" *ngIf="contactForm.get('name')?.errors?.['required']">Name is
+                        required.</small>
+                    <small class="text-danger" *ngIf="contactForm.get('name')?.errors?.['minlength']">Name must be
+                        at least 3 characters long.</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email"> <span class="text-danger">*</span> Your Email:</label>
+                <input type="email" id="email" formControlName="email">
+                <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.errors">
+                    <small class="text-danger" *ngIf="contactForm.get('email')?.errors?.['required']">Email is
+                        required.</small>
+                    <small class="text-danger" *ngIf="contactForm.get('email')?.errors?.['email']">Please enter a
+                        valid email.</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone"> <span class="text-danger">*</span> Your Phone:</label>
+                <input type="text" id="phone" formControlName="phone"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" onkeypress="if(this.value.length > 9) return false;                                    
+             if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;"
+                    maxlength="10">
+                <div *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.errors">
+                    <small class="text-danger" *ngIf="contactForm.get('phone')?.errors?.['required']">Phone number
+                        is required.</small>
+                    <small class="text-danger" *ngIf="contactForm.get('phone')?.errors?.['pattern']">Phone number
+                        must be 10 digits.</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prodName">  Product name :</label>
+                <input type="text" readonly id="prodName" formControlName="prodName">
+               
+            </div>
+            <div class="form-group">
+                <label for="message"> <span class="text-danger">*</span> Message:</label>
+                <textarea id="message" name="message" rows="5" formControlName="message"></textarea>
+                <div *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.errors">
+                    <small class="text-danger" *ngIf="contactForm.get('message')?.errors?.['required']">Message is
+                        required.</small>
+                    <small class="text-danger" *ngIf="contactForm.get('message')?.errors?.['minlength']">Message
+                        must be at least 10 characters long.</small>
+                </div>
+            </div>
+            <button type="submit" [ngClass]="{'btn_disabled_color':!contactForm.valid}"
+                [disabled]="!contactForm.valid">Send
+                mail</button>
+        </form>
+    </div>
+
+</ng-template>
+
+<notifier-container></notifier-container>

@@ -1,12 +1,11 @@
 <div class="container mt-3">
     <div class="row my-4 align-items-center">
-        <div class="col-md-4">
-            <!-- Dropdown filter -->
+        <!-- <div class="col-md-4">
             <select class="form-select mb-2 mb-md-0" >
                 <option value=0>Filter by Category</option>
                 
             </select>
-        </div>
+        </div> -->
         <div class="col-md-4">
             <div class="input-group mb-2 mb-md-0">
                 <input type="text" class="form-control" placeholder="Search..."
@@ -17,7 +16,7 @@
 
         </div>
         <div class="col-md-4">
-            <button class="btn btn-danger" title="Reset" ><i
+            <button class="btn btn-danger" title="Reset" (click)="resetAll()" ><i
                     class="bi bi-arrow-clockwise"></i></button>
         </div>
     </div>
@@ -26,110 +25,26 @@
 
 <div class="container-fluid mt-4" >
     <div class="row" style="max-height: 500px; overflow-y: auto;">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" *ngFor="let data of enquiryListArr">
             <div class="card custom-card">
                 <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <small class="card-date text-right">{{ data.datetime.split('x') | date:'medium' }}</small>
+                    <h5 class="card-title">{{data.name}}</h5>
+                    <p class="card-text">{{data.email}}</p>
+                    <p class="card-text">{{data.phone}}</p>
+                    <p class="card-text">{{data.prod}}</p>
+                    <small class="card-text">{{data.msg}}</small>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" *ngIf="enquiryListArr.length == 0">
             <div class="card custom-card">
                 <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5>No data found</h5>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="card custom-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card custom-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div> <div class="col-md-4 mb-4">
-            <div class="card custom-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div> <div class="col-md-4 mb-4">
-            <div class="card custom-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div> <div class="col-md-4 mb-4">
-            <div class="card custom-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div> <div class="col-md-4 mb-4">
-            <div class="card custom-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div> <div class="col-md-4 mb-4">
-            <div class="card custom-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div> <div class="col-md-4 mb-4">
-            <div class="card custom-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div> <div class="col-md-4 mb-4">
-            <div class="card custom-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
 
         <!-- You can add more cards here with the same structure -->
     </div>
@@ -150,9 +65,9 @@
                     <li class="page-item" (click)="prevPage()">
                         <a class="page-link" > <i class="bi bi-arrow-left-short"></i></a>
                     </li>
-                    <!-- <li class="page-item" aria-current="page">
+                    <li class="page-item" aria-current="page">
                         <a class="page-link">{{currentPage}}</a>
-                    </li> -->
+                    </li>
                     <li class="page-item" (click)="nextPage()">
                         <a class="page-link"><i class="bi bi-arrow-right-short"></i></a>
                     </li>

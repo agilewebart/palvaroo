@@ -69,7 +69,6 @@ export class ProductConfigureComponent implements OnInit {
     //-------- Formula of next page to increase offset -----
     this.currentPage += 1;
     this.offset = this.limit * (this.currentPage - 1);
-    console.log("===============>> ", this.offset)
     this.getAllProducts();
   }
 

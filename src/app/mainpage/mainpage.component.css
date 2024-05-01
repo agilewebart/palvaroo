@@ -8,3 +8,11 @@
 .btn_disabled_color{
     background-color: var(--highlight-color-disabled);
 }
+
+ .section_header{
+    color: var(--highlight-color) !important;
+    font-weight: var(--font-w-xl);
+    text-transform: uppercase;
+    font-size: var( --font-s-x);
+    letter-spacing: .3rem;
+}

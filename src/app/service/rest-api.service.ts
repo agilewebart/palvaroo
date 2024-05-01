@@ -42,7 +42,7 @@ export class RestApiService {
   }
 
   addNewProduct(data: any) {
-    console.log("----------> ",this.httpOptions_2)
+    console.log("----------> ", this.httpOptions_2)
     return this._http.post(this.API + '/v1/addNewProduct', data, this.httpOptions_2);
   }
 
@@ -52,6 +52,10 @@ export class RestApiService {
 
   deleteProduct(data: any) {
     return this._http.post(this.API + '/v1/deleteProduct', data, this.httpOptions_2);
+  }
+
+  getAllEnquiry(data: any) {
+    return this._http.post(this.API + '/v1/getallenquirys', data, this.httpOptions_2);
   }
   //------------- ADMIN ROUTES END------------------
 
@@ -64,7 +68,13 @@ export class RestApiService {
     return this._http.post(this.API + '/v1/getAllProducts', data, this.httpOptions);
   }
 
+  getAllProductsClient(data: any) {
+    return this._http.post(this.API + '/v1/getallnewproducts', data, this.httpOptions);
+  }
+
   sendEmail(data: any): Observable<any> {
     return this._http.post(this.API + '/v1/sendmail', data, this.httpOptions);
   }
+
+
 }

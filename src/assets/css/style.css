@@ -63,7 +63,9 @@ li {
     list-style: none;
 }
 
-
+.navbar-toggler {
+    margin-bottom: 1rem !important  ;
+}
 
 
 
@@ -278,6 +280,14 @@ input:focus {
 
 
 /* --------------------- ABOUT US END----------------------------- */
+
+/* ------------------------- Our Service Start ------------------------------ */
+.service_container{
+    padding: 20px;
+    margin: 0 auto;
+}
+
+/* ------------------------- Our Service End ------------------------------ */
 
 
 /* ---------------------- Products Start ------------------------------ */

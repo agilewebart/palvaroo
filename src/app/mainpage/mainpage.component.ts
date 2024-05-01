@@ -18,6 +18,19 @@ export class MainpageComponent implements OnInit {
 
   contactForm!: FormGroup;
 
+  ourServiceArr: any[] = [
+    {
+      title: 'Product development for 3 phase locomotive'
+    },
+    {
+      title: 'Tendering service for PSU and IR'
+    },
+    {
+      title: 'Order to cash management'
+    },
+
+  ]
+
   constructor(private _router: Router, private _activeRoute: ActivatedRoute, private _rest: RestApiService, private notifier: NotifierService) {
 
   }
@@ -60,7 +73,7 @@ export class MainpageComponent implements OnInit {
       // "userType": ""
     }
 
-    this._rest.getAllProductList(reqPayload).subscribe((res: any) => {
+    this._rest.getAllProductsClient(reqPayload).subscribe((res: any) => {
       if (res.status == 200)
         this.someProductsArr = res.response;
       else
@@ -90,6 +103,7 @@ export class MainpageComponent implements OnInit {
       "name": contactValue.name,
       "email": contactValue.email,
       "phone": contactValue.phone,
+      "product": "NA",
       "message": contactValue.message
     }
 

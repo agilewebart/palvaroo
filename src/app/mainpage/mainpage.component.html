@@ -69,21 +69,22 @@
                         <li class="nav-item" routerLink="." fragment="hero">
                             <a class="nav-link " aria-current="page">Home</a>
                         </li>
-                        <li class="nav-item" routerLink="." fragment="aboutUs">
+                        <!-- <li class="nav-item" routerLink="." fragment="aboutUs">
                             <a class="nav-link " aria-current="page">About</a>
-                        </li>
-                        <li class="nav-item dropdown" routerLink="." fragment="products">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Product
+                        </li> -->
+                        <li class="nav-item " routerLink="." fragment="products">
+                            <!-- <li class="nav-item dropdown" routerLink="." fragment="products"> -->
+                            <a class="nav-link " id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Products
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <!--<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Product 1</a></li>
                                 <li><a class="dropdown-item" href="#">Product 2</a></li>
                                 <li><a class="dropdown-item" href="#">Product 3</a></li>
-                            </ul>
+                            </ul> -->
                         </li>
-                        <li class="nav-item" routerLink="." fragment="services">
+                        <li class="nav-item" routerLink="." fragment="our_services">
                             <a class="nav-link " aria-current="page">Service</a>
                         </li>
                         <li class="nav-item" routerLink="." fragment="contactUs">
@@ -95,7 +96,7 @@
                             <i class="bi bi-facebook"></i>
                             <i class="bi bi-whatsapp"></i>
                             <i class="bi bi-envelope"></i>
-                            <button class="btn btn-outline-light">Work with me</button>
+                            <button class="btn btn-outline-light" routerLink="." fragment="contactUs" >Work with me</button>
                         </div>
                     </div>
                 </div>
@@ -118,39 +119,55 @@
                     <h2>Helping You Build Inner Resilience.</h2>
                     <p>Pellentesque odio aliquam vitae amet, elementum at urna facilisis purus, integer nam libero
                         pharetra viverra et dolor tellus, eget commodo tellus tempus vitae.</p>
-                    <button class="btn btn-outline-light">Lets work Together <i class="bi bi-arrow-right"></i></button>
+                    <button class="btn btn-outline-light"   routerLink="." fragment="contactUs">Lets work Together<i class="bi bi-arrow-right"></i></button>
                 </div>
             </div>
         </div>
     </section>
 
-
+    <!-- 
     <section class="about_us" id="aboutUs">
         <div class="container_about">
             <div class="sub-container container1">
-                <!-- Content for first container -->
                 <h2>Container 1</h2>
                 <p>I’m Lisa Martin.
                     I Help Entrepreneurs Build Their Dreams.</p>
             </div>
             <div class="sub-container">
-                <!-- Content for second container -->
                 <h2>Container 2</h2>
                 <p>Diam lorem nulla suspendisse id ullamcorper lobortis id sit nisl purus tellus curabitur leo volutpat
                     vitae quisque eros, gravida magna diam id elit facilisi gravida at non consectetur nulla leo congue
                     in netus ut et habitant massa id libero turpis.</p>
             </div>
             <div class="sub-container">
-                <!-- Content for third container -->
                 <h2>Container 3</h2>
-                <!-- <img src="/assets/images/about_us_img.jpg"> -->
+                <img src="/assets/images/about_us_img.jpg">
             </div>
             <div class="sub-container container4">
-                <!-- Content for fourth container -->
                 <h2>Container 4</h2>
                 <p>Enim accumsan cras semper metus ante vitae massa aliquam nec, diam pulvinar nisl, egestas quam
                     pharetra nunc magna consequat orci viverra quis aliquam tortor</p>
             </div>
+        </div>
+    </section> -->
+
+    <section class="service_container" id="our_services">
+        <div class="container">
+            <h2 class=" section_header mt-5 mb-4">Our Services</h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+                <div class="col" *ngFor="let data of ourServiceArr">
+                    <div class="card h-100">
+                        <!-- <img src="https://via.placeholder.com/300" class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">{{data.title}}</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </section>
 
@@ -166,7 +183,7 @@
 
     <section class="product_container" id="products">
         <div class="container">
-            <h2 class="text-center mt-5 mb-4">Our Products</h2>
+            <h2 class=" section_header mt-5 mb-4">Our Products</h2>
             <div class="row">
                 <swiper-container slides-per-view="auto" autoplay="true" speed="500" loop="true">
                     <swiper-slide class="col-lg-4 col-md-6 col-sm-12" *ngFor="let data of someProductsArr">
@@ -195,43 +212,51 @@
 
     <section class="contact" id="contactUs">
         <div class="contact_container">
-            <h2>Contact Us</h2>
+            <h2 class="section_header">Contact Us</h2>
             <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="name"> <span class="text-danger">*</span> Name: </label>
+                    <label for="name"> <span class="text-danger">*</span>Enter your name: </label>
                     <input type="text" id="name" formControlName="name">
                     <div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors">
-                        <small class="text-danger" *ngIf="contactForm.get('name')?.errors?.['required']">Name is required.</small>
-                        <small class="text-danger" *ngIf="contactForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</small>
-                      </div>
+                        <small class="text-danger" *ngIf="contactForm.get('name')?.errors?.['required']">Name is
+                            required.</small>
+                        <small class="text-danger" *ngIf="contactForm.get('name')?.errors?.['minlength']">Name must be
+                            at least 3 characters long.</small>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="email"> <span class="text-danger">*</span> Email:</label>
+                    <label for="email"> <span class="text-danger">*</span>Enter your email:</label>
                     <input type="email" id="email" formControlName="email">
                     <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.errors">
-                        <small class="text-danger" *ngIf="contactForm.get('email')?.errors?.['required']">Email is required.</small>
-                        <small class="text-danger" *ngIf="contactForm.get('email')?.errors?.['email']">Please enter a valid email.</small>
-                      </div>
+                        <small class="text-danger" *ngIf="contactForm.get('email')?.errors?.['required']">Email is
+                            required.</small>
+                        <small class="text-danger" *ngIf="contactForm.get('email')?.errors?.['email']">Please enter a
+                            valid email.</small>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="phone"> <span class="text-danger">*</span> Phone:</label>
+                    <label for="phone"> <span class="text-danger">*</span>Enter your phone:</label>
                     <input type="text" id="phone" formControlName="phone"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
                         onkeypress="if(this.value.length > 9) return false;                                    
                      if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;" maxlength="10">
-                     <div *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.errors">
-                        <small class="text-danger" *ngIf="contactForm.get('phone')?.errors?.['required']">Phone number is required.</small>
-                        <small class="text-danger" *ngIf="contactForm.get('phone')?.errors?.['pattern']">Phone number must be 10 digits.</small>
-                      </div>
+                    <div *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.errors">
+                        <small class="text-danger" *ngIf="contactForm.get('phone')?.errors?.['required']">Phone number
+                            is required.</small>
+                        <small class="text-danger" *ngIf="contactForm.get('phone')?.errors?.['pattern']">Phone number
+                            must be 10 digits.</small>
+                    </div>
                 </div>
-               
+
                 <div class="form-group">
                     <label for="message"> <span class="text-danger">*</span> Message:</label>
                     <textarea id="message" name="message" rows="5" formControlName="message"></textarea>
                     <div *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.errors">
-                        <small class="text-danger" *ngIf="contactForm.get('message')?.errors?.['required']">Message is required.</small>
-                        <small class="text-danger" *ngIf="contactForm.get('message')?.errors?.['minlength']">Message must be at least 10 characters long.</small>
-                      </div>
+                        <small class="text-danger" *ngIf="contactForm.get('message')?.errors?.['required']">Message is
+                            required.</small>
+                        <small class="text-danger" *ngIf="contactForm.get('message')?.errors?.['minlength']">Message
+                            must be at least 10 characters long.</small>
+                    </div>
                 </div>
                 <button type="submit" [ngClass]="{'btn_disabled_color':!contactForm.valid}"
                     [disabled]="!contactForm.valid">Send
