@@ -110,7 +110,7 @@ module.exports.getAllProducts = async (reqBody) => {
 
         if (req.categorySearchId != null && req.categorySearchId != undefined && req.categorySearchId != "" && req.categorySearchId != 0) {
             // qryArr = [];
-            qryArr = [req.categorySearchId,req.limit,req.offset];
+            qryArr = [req.categorySearchId, req.limit, req.offset];
             // qryArr.push(req.categorySearchId);
             sqlQry = ` SELECT 
             pd.id as productId,
@@ -190,7 +190,7 @@ module.exports.getAllProducts = async (reqBody) => {
             return dbRes.rows;
         }
         else {
-            qryArr = [req.limit,req.offset];
+            qryArr = [req.limit, req.offset];
             sqlQry = `
             SELECT 
             pd.id as productId,
@@ -243,4 +243,93 @@ module.exports.getAllCategory = async (reqBody) => {
         console.log("---------Db Error ----> ", err);
         return -500
     }
-} 
+}
+
+
+//--------------------- Get all products 2 ------------------------------
+module.exports.getAllProducts_2 = async (reqBody) => {
+    // {
+    //     "limit":"10",
+    //     "offset":"10",
+    //     "globalSearch":"any",
+    //     "categorySearchId":"catId"
+    // }
+    try {
+        let req = reqBody;
+        let qryArr = [];
+        let sqlQry;
+        let dbRes = null;
+
+
+        if (req.categorySearchId != null && req.categorySearchId != undefined && req.categorySearchId != "" && req.categorySearchId != 0) {
+            qryArr = [req.categorySearchId, req.limit, req.offset];
+            sqlQry = ` SELECT 
+            pd.id as productId,
+            pd.name as productName,
+            cat.category_name as categoryName,
+            cat.id as categoryId,
+            pd.description as productDesc,
+            pd.price as productPrice,
+            pd.image_name as productImg
+            FROM products pd, category cat
+            WHERE pd.category_id = $1 AND pd.category_id = cat.id AND pd.status = 1
+            ORDER BY productId ASC
+            LIMIT $2 OFFSET $3
+            `
+            dbRes = await writePool.query(sqlQry, qryArr);
+            return dbRes.rows;
+        }
+        else if ( req.globalSearch != null && req.globalSearch != undefined && req.globalSearch != '' && typeOFGlobalSearch(req.globalSearch)) {
+            qryArr = [];
+            qryArr.push(req.globalSearch);
+            sqlQry = `SELECT 
+            pd.id AS productid,
+            pd.name AS productname,
+            cat.category_name AS categoryname,
+            cat.id AS categoryid,
+            pd.description AS productdesc,
+            pd.price AS productprice,
+            pd.image_name AS productimg,
+            pd.status AS productstats,
+            cat.status AS categorystats
+        FROM 
+            products pd,
+            category cat
+        WHERE 
+            pd.category_id = cat.id AND
+            (
+                LOWER(pd.name) LIKE '%' || LOWER($1) || '%' OR
+                LOWER(cat.category_name) LIKE '%' || LOWER($1) || '%' OR
+                LOWER(pd.price::TEXT) LIKE '%' || LOWER($1) || '%' OR
+                LOWER(pd.description) LIKE '%' || LOWER($1) || '%' 
+            )
+            AND pd.status = 1; `
+            dbRes = await writePool.query(sqlQry, qryArr);
+            return dbRes.rows;
+        }
+        else {
+            qryArr = [req.limit, req.offset];
+            sqlQry = `
+            SELECT 
+            pd.id as productId,
+            pd.name as productName,
+            cat.category_name as categoryName,
+            pd.description as productDesc,
+            pd.price as productPrice,
+            pd.image_name as productImg
+            FROM products pd
+            INNER JOIN 
+            category cat
+            ON (pd.category_id = cat.id) WHERE  pd.status = 1
+            ORDER BY productId ASC
+            LIMIT $1 OFFSET $2
+        `
+            dbRes = await writePool.query(sqlQry, qryArr);
+            return dbRes.rows;
+        }
+
+    } catch (err) {
+        console.log("---------Db Error ----> ", err);
+        return -500
+    }
+}

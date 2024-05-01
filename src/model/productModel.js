@@ -105,3 +105,22 @@ module.exports.get_all_Category = async (body) => {
         return respStruct.responseStruct(0, false, 500, 'Internal server error', false);
     }
 }
+
+
+//--------------------- Get all products 2 ----------------------
+module.exports.get_all_Products = async (body) => {
+    try{ 
+        let reqBody = body;
+        let result = await productDao.getAllProducts_2(reqBody);
+        if (result == -500) {
+            return respStruct.responseStruct(0, false, 400, "Some error occur", null);
+        }
+        else {
+            return respStruct.responseStruct(1, true, 200, "Data fetch successfully", result);
+        }
+
+    }catch(err){
+        console.log("-------------- Modal error---> ", err);
+        return respStruct.responseStruct(0, false, 500, 'Internal server error', false);
+    }
+}

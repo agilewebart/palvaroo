@@ -96,7 +96,7 @@ router.post('/v1/getAllProducts', async (req, res) => {
         return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
 
     } catch (err) {
-        console.log("-------Add Controller Error --> ", err);
+        console.log("-------get all products 1 Controller Error --> ", err);
         return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
@@ -105,7 +105,7 @@ router.post('/v1/getAllProducts', async (req, res) => {
 
 
 
-//----------------- Get all products ------------------------
+//----------------- Get all categories ------------------------
 router.post('/v1/getAllCategory', async (req, res) => {
     try {
         let body = req.body;
@@ -117,10 +117,30 @@ router.post('/v1/getAllCategory', async (req, res) => {
         return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
 
     } catch (err) {
-        console.log("-------Add Controller Error --> ", err);
+        console.log("-------Category Controller Error --> ", err);
         return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
     }
 });
+
+
+//----------------- Get all products for client -----------------
+router.post('/v1/getallnewproducts', async (req, res) => {
+    try {
+        let body = req.body;
+        let finalResult = await productModel.get_all_Products(body);
+
+        if (finalResult.bkendFlag == 1) {
+            return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+        }
+        return res.status(200).json({ success: finalResult.fendStuct.success, status: finalResult.fendStuct.status, message: finalResult.fendStuct.message, response: finalResult.fendStuct.response })
+
+    } catch (err) {
+        console.log("-------get all prod 2 Controller Error --> ", err);
+        return res.status(200).json({ success: false, status: 500, message: "Internal Server error" })
+    }
+})
+
+
 
 
 

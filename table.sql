@@ -60,7 +60,7 @@ CREATE TABLE users (
  status INT NOT NULL DEFAULT 1
 );
 
--- Products Table ----
+-- Products Table old ----
 CREATE TABLE products (
  id SERIAL PRIMARY KEY,
  name VARCHAR(255) NOT NULL,
@@ -72,6 +72,7 @@ CREATE TABLE products (
  modifiedat VARCHAR(100) NOT NULL,
  status INT NOT NULL DEFAULT 1
 );
+-- Products Table new ----
 --------------- 
 CREATE TABLE IF NOT EXISTS public.products
 (
@@ -95,12 +96,23 @@ CREATE TABLE category (
  status INT NOT NULL DEFAULT 1
 );
 
--- Enquiry Table ------
+-- Enquiry Table OLD------
 CREATE TABLE enquiry (
  id SERIAL PRIMARY KEY,
  enquiryname VARCHAR(255) NOT NULL,
  enquiryemail VARCHAR(255) NOT NULL,
  enquiryphone VARCHAR(255) NOT NULL,
+ enquirymsg VARCHAR(500) NOT NULL,
+ enquiryat VARCHAR(100) NOT NULL
+);
+
+-- Enquiry Table New  ------
+CREATE TABLE enquiry (
+ id SERIAL PRIMARY KEY,
+ enquiryname VARCHAR(255) NOT NULL,
+ enquiryemail VARCHAR(255) NOT NULL,
+ enquiryphone VARCHAR(255) NOT NULL,
+ enquiryprod VARCHAR(255) NOT NULL,
  enquirymsg VARCHAR(500) NOT NULL,
  enquiryat VARCHAR(100) NOT NULL
 );
